@@ -108,10 +108,7 @@ sa_time <- sa_time %>%
                  rep("Joburg", 2)))
 
 sa_long <- sa_time %>% 
-  gather(key = "time_type", value = "minutes", -human)
-
-ggplot(data = sa_long, aes(x = "", y = time_type)) +
-  geom_bar()
+  gather(key = "time_type", value = "minutes", -human, -geo)
 
 sa_count <- sa_long %>%
   count(time_type) %>% 
@@ -170,7 +167,7 @@ sa_summary_stats <- sa_clean %>%
 # Plot these
 ggplot(data = sa_clean, aes(x = time_type, y = minutes)) +
   geom_boxplot(aes(fill = time_type), notch = TRUE) +
-  geom_point(date = sa_summary_stats,  size = 6, shape = 18,
+  geom_point(data = sa_summary_stats,  size = 6, shape = 18,
              aes(y = time_type_mean, colour = "goldenrod"))
 
 
