@@ -96,7 +96,7 @@ chicks_0_21 <- ChickWeight %>%
   filter(Time %in% c(0,2, 21))
 
   
-ggplot(data = chicks_0_21, aes(x = Time, y = weight)) +
+ggplot(data = chicks_0_21, aes(x = as.factor(Time), y = weight)) +
   geom_boxplot(notch = T, aes(fill = as.factor(Time)))
 
 # Run an ANOVA
@@ -121,7 +121,7 @@ chicks_means <- ChickWeight %>%
   group_by(Diet, Time) %>% 
   summarise(weight_mean = mean(weight, na.rm = T))
 
-ggplot(data = ChickWeight, aes(x = Time, y = weight, colour = Diet)) +
+ggplot(data = chicks_means, aes(x = Time, y = weight_mean, colour = Diet)) +
   geom_line(size = 2) +
   geom_point(shape = 15, size = 5)
 
