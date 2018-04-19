@@ -27,7 +27,7 @@ descdist(r_norm, discrete = FALSE, boot = 100)
 
 # uniform data
 y <- runif(100)
-par(mflow = c(1, 1))
+par(mfrow = c(1, 1))
 plot(x = c(1:100), y = y)
 hist(y)
 descdist(y, discrete = FALSE)
@@ -162,8 +162,9 @@ ggplot(data = ecklonia_sub, aes(x = variable, y = value, fill = site)) +
   geom_boxplot() +
   coord_flip() +
   labs(y = "epiphyte_length (m)", x = "")
+
 library(ggpubr)
-library(ggplot)
+
 t.test(value ~ site, data = ecklonia_sub, var.equal = TRUE, alternative = "greater")
 compare_means(value ~ site, data = ecklonia_sub, method = "t.test", var.equal = TRUE, alternative = "greater")
 
@@ -191,3 +192,4 @@ t.test(pH ~ Site, data = pH_new, var.equal = TRUE)
 #6.317179             6.070000 
 
 # From the t-test we see that there is a significant difference
+# RWS: The p-value is 0.4647... That is not a significant difference.
