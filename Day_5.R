@@ -247,7 +247,6 @@ ecklonia_cor <- cor(ecklonia_sub)
 cor.test(ecklonia$length, ecklonia$stipe_diameter, method = "spearman")
 
 
-
 # Kendall rank correlation (not ordinal) ------------------------------------------------
 cor.test(ecklonia$primary_blade_length, ecklonia$primary_blade_width, method = "kendall")
 
