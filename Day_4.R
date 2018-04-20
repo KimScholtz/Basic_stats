@@ -136,3 +136,18 @@ kruskal.test(weight ~ Diet, data = chicks_0_21)
 
 library(pgirmess)  
 kruskalmc(weight ~ Diet, data =chicks_0_21)
+
+
+# Exercise 7.4.1 ----------------------------------------------------------
+
+# Enter the mass at the end of the experiment
+# Question: Does feed type have an effect on the mass of pigs at the end of the experiment?
+feed_1 <- c(60.8, 57.0, 65.0, 58.6, 61.7)
+feed_2 <- c(68.7, 67.7, 74.0, 66.3, 69.8)
+feed_3 <- c(102.6, 102.1, 100.2, 96.5)
+feed_4 <- c(87.9, 84.2, 83.1, 85.7, 90.3)
+
+# Make a dataframe
+bacon <- as.tibble(data.frame(
+  feed = c(rep("Feed 1", length(feed_1)), rep("Feed 2", length(feed_2)), rep("Feed 3", length(feed_3)), rep("Feed 4", length(feed_4))),
+  mass = c(feed_1, feed_2, feed_3, feed_4)))
