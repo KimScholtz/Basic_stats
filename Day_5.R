@@ -5,8 +5,9 @@
 
 # Load libraries ----------------------------------------------------------
 library(tidyverse)
-library(Rmisc)
+# library(Rmisc) # Unfortunately this overrides many dplyr functions
 library(ggpubr)
+
 # Load data ---------------------------------------------------------------
 
 snakes <- read_csv("snakes.csv") %>% 
@@ -28,7 +29,7 @@ snakes_summary <- snakes %>%
 # Test a hypothesis -------------------------------------------------------
 
 # First calculate SE and CI
-snakes.summary2 <- summarySE(data = snakes,
+snakes.summary2 <- Rmisc::summarySE(data = snakes,
                                measurevar = "openings",
                                groupvars = c("day"))
 
@@ -88,7 +89,7 @@ ggplot(data = snakes, aes(x = as.numeric(day),
 library(tidyverse)
 library(ggpubr)
 library(corrplot)
-library(ggplot2)
+
 moths <- read_csv("moth_traps.csv") %>% 
   gather(key = "trap", value = "count", - Location)
 
@@ -111,11 +112,11 @@ moth_trap_summary <- moths %>%
 
 #  Calculate SE & CI ------------------------------------------------------
 
-moth_loc_summary_2 <- summarySE(data = moths,
+moth_loc_summary_2 <- Rmisc::summarySE(data = moths,
                                 measurevar = "count",
                                 groupvars = c("Location"))
 
-moth_trap_summary_2 <- summarySE(data = moths,
+moth_trap_summary_2 <- Rmisc::summarySE(data = moths,
                                  measurevar = "count",
                                  groupvars = c("trap"))
 
@@ -137,6 +138,8 @@ Final <- ggarrange(Location, Trap,
                    ncol = 2, nrow = 1,
                    labels = c("Location", "Trap"),
                    common.legend = TRUE)
+Final
+# RWS: Very nice
 
 # Test the hypothesis -----------------------------------------------------
 
@@ -195,10 +198,10 @@ ggplot(data = faithful, aes(x = waiting, y = eruptions)) +
 
 faithful_lm <- lm(eruptions ~ waiting, data = faithful)
 summary(faithful_lm)
-slope <- round(eruption.lm$coef[2], 3)
+slope <- round(faithful_lm$coef[2], 3)
 # p.val <- round(coefficients(summary(eruption.lm))[2, 4], 3) # it approx. 0, so...
 p.val = 0.001
-r2 <- round(summary(eruption.lm)$r.squared, 3)
+r2 <- round(summary(faithful_lm)$r.squared, 3)
 
 ggplot(data = faithful, aes(x = waiting, y = eruptions)) +
   geom_point() +
